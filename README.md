@@ -2,6 +2,14 @@
 
 Gaspra Colour Picker is a simple, modern, and highly interactive .NET web application that transforms the entire browser window into a continuous color palette. As users move their mouse across the viewport, the center of the screen displays real-time HEX, RGB, and HSL color readouts on a premium glassmorphic card, making it incredibly fast and satisfying to find and copy colors.
 
+![Gaspra Colour Picker Screenshot](assets/gaspra-preview.png)
+
+## How It Works
+
+1. **Explore**: Move your cursor or drag your finger horizontally to sweep through Hues ($0^\circ - 360^\circ$) and vertically to sweep through Lightness and Saturation levels, covering the full visible color spectrum.
+2. **Lock/Freeze Selection**: Press the `Spacebar` on desktop or release your finger on touch screens to freeze the color selection. This allows you to inspect readouts or click specific copy triggers without losing your selected color.
+3. **Instant Copy**: Click anywhere (desktop) or tap the docked HUD (mobile) to copy the HEX code to your clipboard. An animated "COPIED!" badge appears on the card accompanied by a smooth, coordinate-centered color ripple.
+
 ## Features
 
 - **Full-Viewport Palette**: An interactive color gradient covering 100% of the browser window.

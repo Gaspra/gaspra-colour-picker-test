@@ -51,3 +51,18 @@
   - Present the completed project to the user and hand over the repository.
 
 ---
+
+## [2026-07-15T12:09:00+01:00] - Documentation and Showcase Update
+
+- **Time to Complete**: 5 minutes
+- **Key Outcomes**:
+  - Created the `assets/` folder at the repository root and copied the user's color-picker screenshot to [gaspra-preview.png](../../../assets/gaspra-preview.png).
+  - Modified [README.md](../../../README.md) to embed the screenshot and add a detailed "How It Works" interaction overview.
+- **Key Decisions**:
+  - Stored the showcase screenshot inside the repository using a relative asset path to ensure offline legibility and portability.
+- **Validation**:
+  - Validated that the image reference path is correct relative to the root of the repository.
+- **Follow-ups**:
+  - None. All tasks completed.
+
+---
