@@ -1,64 +1,59 @@
+# Gaspra Colour Picker
 
-# Agentic Project Template
+Gaspra Colour Picker is a simple, modern, and highly interactive .NET web application that transforms the entire browser window into a continuous color palette. As users move their mouse across the viewport, the center of the screen displays real-time HEX, RGB, and HSL color readouts on a premium glassmorphic card, making it incredibly fast and satisfying to find and copy colors.
 
-This is a template repository for building agentic projects. It is intended to be used as a starting point for new projects and can be customized to fit the specific needs of the project.
+## Features
 
-## Usage
+- **Full-Viewport Palette**: An interactive color gradient covering 100% of the browser window.
+- **Glassmorphism HUD**: A beautifully styled center display that shows HEX, RGB, and HSL values.
+- **Click-to-Copy**: Click anywhere to copy the HEX code instantly to your clipboard, accompanied by a visual ripple effect and HUD notification.
+- **Dynamic Text Legibility**: The HUD automatically switches between light and dark modes based on the background color brightness to ensure readability.
+- **Keyboard Lock (`Spacebar`)**: Freeze the current color selection to let you inspect details, copy values manually, or move your mouse off-screen without losing your color.
 
-There are pre-defined roles in the agents file to help setup an orchestrated development team with a product owner, project manager and developers. A human-orchestrator is needed to kickoff work and aid coordination depending on the defined project.
+## Project Structure
 
-```mermaid
-flowchart LR
-    po["Product Owner\nAgent"]
-    pm["Project Manager\nAgent"]
-    dev1["Developer\nAgent"]
-    dev2["Developer\nAgent"]
-    dev3["Developer\nAgent"]
-    dev4["Developer\nAgent"]
-
-    po --> |"Creates a product scope to be split into work tasks."| pm
-    pm --> |"After a phase of work, check with PO to confirm aligned progress."| po
-    pm --> dev1
-    pm --> dev2
-    pm --> dev3
-    pm --> dev4
-```
-
-## Template structure
-
-Below is the directory structure provided out-of-the-box by this template:
+The project follows an agent-driven development layout:
 
 ```text
 .
-├── .agents/
-│   ├── context/
-│   │   └── context-library.md
-│   ├── development/
-│   │   └── development-agents.md
-│   ├── product/
-│   │   └── .gitkeep
-│   └── skills/
-│       ├── context-sorter/
-│       │   └── SKILL.md
-│       └── development-tracker/
-│           └── SKILL.md
-├── src/
-│   └── .gitkeep
-├── AGENTS.md
-└── README.md
+├── .agents/                    # Agent specifications and logs
+│   ├── context/                # Indexed context documents for agents
+│   ├── development/            # Developer agent tracking and journals
+│   └── product/                # Scoping documents by the Product Owner
+├── src/                        # Main web application (contained here)
+│   ├── Program.cs              # ASP.NET Core minimal api entry point
+│   ├── GaspraColourPicker.csproj
+│   └── wwwroot/                # Front-end static assets
+│       ├── index.html          # HTML structure
+│       ├── style.css           # Premium vanilla CSS styling
+│       └── app.js              # Gradient math & copy logic
+├── AGENTS.md                   # Instructions and rules for AI agents
+└── README.md                   # This documentation
 ```
 
-### Key Components
+## Getting Started
 
-| Component | Path | Description |
-| :--- | :--- | :--- |
-| **Agent Roles & Guidelines** | [AGENTS.md](AGENTS.md) | Defines prompt instructions, project context lookups, and specific constraints for Developer, Project Manager, and Product Owner roles. |
-| **Agent Task Registry** | [.agents/development/development-agents.md](.agents/development/development-agents.md) | Maps agent codenames and conversation IDs to durability notes and recent work logs. |
-| **Context Library Catalog** | [.agents/context/context-library.md](.agents/context/context-library.md) | Indexes reusable context documents so agents can quickly identify and consume relevant workspace information. |
-| **Product Scoping Folder** | [.agents/product/](.agents/product/) | Contains scoping documents and product requirements created by the Product Owner. |
-| **Context Sorter Skill** | [.agents/skills/context-sorter/SKILL.md](.agents/skills/context-sorter/SKILL.md) | Automates the workflow of importing files/folders into the context library and updating the catalog. |
-| **Development Tracker Skill** | [.agents/skills/development-tracker/SKILL.md](.agents/skills/development-tracker/SKILL.md) | Automates registering new agent identities, tracking tasks, updating the roster, and logging activities in journals. |
+### Prerequisites
 
-> [!IMPORTANT]
-> **Template Setup Instruction for Agents:**
-> Overwrite this `README.md` file with project-specific documentation as your first action. Do not delete the file itself; clear its contents and replace them with details relevant to the project being built.
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later.
+- A modern web browser.
+
+### Running the Application
+
+1. Open a terminal and navigate to the project directory.
+2. Navigate into the `src` folder:
+   ```powershell
+   cd src
+   ```
+3. Run the development server:
+   ```powershell
+   dotnet run
+   ```
+4. Open your browser and navigate to `http://localhost:5000` (or the port specified in the console output) to begin picking colors!
+
+## Development and Agent Team
+
+This repository is built using an orchestrated agent team:
+- **Product Owner** (`ivory-glacier-falcon`): Scopes requirements and maintains product guidelines.
+- **Project Manager**: Organizes, schedules, and delegates tasks to developer agents.
+- **Developers**: Implement coding tasks in a test-driven manner inside `src/`.

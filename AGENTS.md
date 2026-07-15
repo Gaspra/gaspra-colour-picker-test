@@ -2,6 +2,8 @@
 
 Before executing a prompt, read the project README.md. When work is completed, invoke the $development-tracker skill to record the task and its handoff details.
 
+All links created in markdown files (e.g., README.md, activity journals, task instructions, scoping files) must use relative repository paths (e.g. `[AGENTS.md](AGENTS.md)` or `[journal.md](journal.md)`) instead of absolute local file system URLs (`file:///...`) to ensure system independence.
+
 # Project Context
 
 Before analyzing the workspace, review `.agents/context/context-library.md` for a high-level overview of the available project context. Retrieve specific context via the project-context skill when needed.
