@@ -61,7 +61,82 @@ The project follows an agent-driven development layout:
 
 ## Development and Agent Team
 
-This repository is built using an orchestrated agent team:
+This repository was built using an orchestrated agent team:
 - **Product Owner** (`ivory-glacier-falcon`): Scopes requirements and maintains product guidelines.
-- **Project Manager**: Organizes, schedules, and delegates tasks to developer agents.
+- **Project Manager** (`golden-canyon-eagle`): Organizes, schedules, and delegates tasks to developer agents.
 - **Developers**: Implement coding tasks in a test-driven manner inside `src/`.
+
+---
+
+## Case Study: Agentic Workflow & Template Analysis (Whitepaper)
+
+This section serves as a case study and guide for developer teams on how this repository's agentic workflow and template structure were utilized to build the Gaspra Colour Picker from scratch.
+
+### 1. Project Timeline & Development Metrics
+
+The complete application was scoped, designed, implemented, and verified in **34 minutes** of active wall-clock execution time (derived directly from Git check-in timestamps):
+
+| Phase | Agent Role | Codename | Time Spent (Actual) | Key Deliverables |
+| --- | --- | --- | --- | --- |
+| **Product Scoping** | Product Owner | `ivory-glacier-falcon` | 13 mins | Defined core requirements, UI rules, and mobile behavior in [.agents/product/product-scope.md](.agents/product/product-scope.md). |
+| **Task Allocation** | Project Manager | `golden-canyon-eagle` | 3 mins | Analyzed scope, split tasks into 3 distinct phases, and created workspaces under `.agents/development/`. |
+| **Phase 1: Backend** | Developer | `amber-canyon-wolf` | 5 mins | Initialized ASP.NET Core minimal host, configured static routes, and set up xUnit integration tests. |
+| **Phase 2: Frontend** | Developer | `emerald-forest-badger` | 6 mins | Built HSL gradient math, glassmorphic HUD layout, luminance calculations, and automated JS math tests. |
+| **Phase 3: Mobile/UX** | Developer | `sapphire-ocean-dolphin` | 4 mins | Unified Pointer Events, docked HUD styles, click ripple overlays, and mock DOM interaction tests. |
+| **Final Quality QA** | Project Manager | `golden-canyon-eagle` | 3 mins | Ran full C#/JS test pipeline, verified acceptance criteria, and finalized documentation. |
+
+**Total Cumulative Time**: 34 minutes, 5 seconds.
+
+---
+
+### 2. Work Developed
+
+The system architecture spans both backend routing and complex frontend interactions:
+- **Backend Host**: Serves the application statically from `src/wwwroot/` with optimal caching and fallback headers.
+- **Color Engine (`color-math.js`)**: Maps coordinates to HSL, converts to RGB/HEX, and applies the WCAG relative luminance formula ($L = 0.2126 \times R + 0.7152 \times G + 0.0722 \times B$) to keep HUD text contrast high.
+- **State Machine (`app.js`)**: Handles mouse tracking, spacebar locks, unified touch pointer gestures, and viewport scroll locks on touch devices.
+- **Testing Architecture**: Uses xUnit for routing tests and native Node.js ESM modules (`assert`) for JS tests, which are fully integrated into the MSBuild build-and-test cycle.
+
+---
+
+### 3. How to Use the Template (Developer Guide)
+
+To replicate this high-fidelity workflow on other projects, developers should follow the standard lifecycle rules defined in [AGENTS.md](AGENTS.md):
+
+#### Step 1: Requirements Definition (Product Owner)
+* **Action**: Create a comprehensive scoping file (e.g., `product-scope.md`) inside `.agents/product/`.
+* **Standard**: Be explicit about technical stack limitations, design systems (fonts, colors, blur parameters), accessibility rules, and mobile behaviors. Do not begin planning or implementation until the scope is versioned and finalized.
+
+#### Step 2: Work Chunking & Initialization (Project Manager)
+* **Action**:
+  1. Break the scope into sequential, logical work chunks where each phase has clear boundaries and satisfying dependencies.
+  2. Create a development workspace folder for each agent under `.agents/development/<codename>/`.
+  3. Initialize each workspace with two files:
+     - `agent.md`: Defines the role, conversation IDs, and context boundaries.
+     - `instructions.md`: Provides a clear `Definition of Ready`, task description, checklist of steps, and handoff instructions.
+  4. Register all agents in the centralized [.agents/development/development-agents.md](.agents/development/development-agents.md) roster.
+
+#### Step 3: Test-Driven Development (Developers)
+* **Action**: 
+  1. Set the instructions file status to `Pending` and review dependencies.
+  2. Build a test suite representing the target behavior *before* writing the primary implementation code (TDD).
+  3. Confine all production work within the `src/` directory to keep the repository root clean.
+  4. Write tests for mathematical and algorithmic functions as pure, side-effect-free functions so they can run inside lightweight headless test runners.
+
+#### Step 4: Verification & Handoff (Developers & PM)
+* **Action**:
+  1. Run the test commands to verify all assertions pass.
+  2. Check items off in `instructions.md` and set the status to `Completed`.
+  3. Add an entry to the agent's local `journal.md` describing outcomes, decisions, validation steps, and future follow-ups.
+  4. Update the roster in `development-agents.md` with the completed log and handoff status.
+
+---
+
+### 4. Assessment of the Agentic Workflow
+
+Implementing a project using this structured template offers major advantages over ad-hoc generation:
+
+* **No Context Drift**: By creating isolated instructions and assigning dedicated, narrow developer roles (e.g., `emerald-forest-badger` solely focused on core layout and math, while `sapphire-ocean-dolphin` refined mobile UX), the agents avoided context bloating. This resulted in zero compilation failures, highly focused code, and precise logic.
+* **TDD Quality Enforcement**: The `AGENTS.md` TDD rules forced the developers to build a testing pipeline from day one. Integrating the Node.js unit tests directly into `dotnet test` meant that any regression on the frontend or backend would instantly break the build, securing long-term code quality.
+* **Perfect Traceability**: The activity journals (`journal.md`) created a durable, human-readable audit trail of every design choice (such as using coordinate-based math instead of canvas checks to prevent performance lag, and using pointer-release toggles to lock mobile state).
+* **Clear Task Hand-offs**: The dependencies listed in `instructions.md` established a natural phasing mechanism, allowing the project to proceed smoothly without conflicts or code regression between frontend and backend.

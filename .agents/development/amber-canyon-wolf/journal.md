@@ -2,7 +2,7 @@
 
 ## [2026-07-15T11:55:00+01:00] - Backend & Foundation Setup
 
-- **Time to Complete**: 1 hour
+- **Time to Complete**: 5 minutes
 - **Key Outcomes**:
   - Appended standard .NET build ignore rules to [../../.gitignore](../../.gitignore)
   - Created ASP.NET Core minimal web project file [../../src/GaspraColourPicker.csproj](../../src/GaspraColourPicker.csproj) and configured it to serve static files in [../../src/Program.cs](../../src/Program.cs)

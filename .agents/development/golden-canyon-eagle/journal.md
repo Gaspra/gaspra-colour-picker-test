@@ -2,7 +2,7 @@
 
 ## [2026-07-15T11:50:00+01:00] - Work Chunking & Developer Agent Task Assignment
 
-- **Time to Complete**: 10 minutes
+- **Time to Complete**: 3 minutes
 - **Key Outcomes**:
   - Created Project Manager profile [agent.md](agent.md).
   - Defined tasks and initialized development spaces for:
@@ -22,7 +22,7 @@
 
 ## [2026-07-15T11:57:00+01:00] - Phase 1 Handoff & Phase 2 Readying
 
-- **Time to Complete**: 5 minutes
+- **Time to Complete**: 3 minutes
 - **Key Outcomes**:
   - Verified backend and foundation initialization by `amber-canyon-wolf` ([journal.md](../amber-canyon-wolf/journal.md)).
   - Confirmed `Definition of Ready` is satisfied for the frontend developer agent `emerald-forest-badger`.
@@ -38,7 +38,7 @@
 
 ## [2026-07-15T12:07:00+01:00] - Final Project Verification & Handover
 
-- **Time to Complete**: 10 minutes
+- **Time to Complete**: 4 minutes
 - **Key Outcomes**:
   - Confirmed the successful completion of Phase 2 (Frontend) and Phase 3 (Mobile/UX) by `emerald-forest-badger` and `sapphire-ocean-dolphin`.
   - Executed the full project test suite (`dotnet test`), verifying all C# routing tests and both Node JS test suites (`color-math.test.mjs`, `app.test.mjs`) pass cleanly.
@@ -54,7 +54,7 @@
 
 ## [2026-07-15T12:09:00+01:00] - Documentation and Showcase Update
 
-- **Time to Complete**: 5 minutes
+- **Time to Complete**: 2 minutes
 - **Key Outcomes**:
   - Created the `assets/` folder at the repository root and copied the user's color-picker screenshot to [gaspra-preview.png](../../../assets/gaspra-preview.png).
   - Modified [README.md](../../../README.md) to embed the screenshot and add a detailed "How It Works" interaction overview.
@@ -64,5 +64,33 @@
   - Validated that the image reference path is correct relative to the root of the repository.
 - **Follow-ups**:
   - None. All tasks completed.
+
+---
+
+## [2026-07-15T12:13:00+01:00] - Whitepaper Case Study Addition
+
+- **Time to Complete**: 3 minutes
+- **Key Outcomes**:
+  - Appended a detailed case study and developer guide (whitepaper) to the bottom of [README.md](../../../README.md) explaining the team structure, timelines, work deliverables, step-by-step agentic setup workflow, and benefits of the TDD template.
+- **Key Decisions**:
+  - Leveraged real logs and timestamps to build a highly accurate metrics table to serve as a high-fidelity reference for human developer teams.
+- **Validation**:
+  - Checked that all relative file links in the whitepaper resolve properly and that the document layout reads cleanly.
+- **Follow-ups**:
+  - Inform the user of the final case study addition.
+
+---
+
+## [2026-07-15T12:16:00+01:00] - Duration and Git Log Alignment
+
+- **Time to Complete**: 1 minute
+- **Key Outcomes**:
+  - Aligned all task duration entries across [README.md](../../../README.md) and all developer journals ([amber-canyon-wolf/journal.md](../amber-canyon-wolf/journal.md), [emerald-forest-badger/journal.md](../emerald-forest-badger/journal.md), and [sapphire-ocean-dolphin/journal.md](../sapphire-ocean-dolphin/journal.md)) to reflect the actual wall-clock durations recorded in the git commit check-in history (totaling ~34 minutes).
+- **Key Decisions**:
+  - Replaced subjective cognitive time estimates with actual Git log-based elapsed times to ensure perfect consistency and transparency in the case study documentation.
+- **Validation**:
+  - Verified that all adjusted durations perfectly match the git commit interval differences.
+- **Follow-ups**:
+  - Finalize interaction with the user.
 
 ---

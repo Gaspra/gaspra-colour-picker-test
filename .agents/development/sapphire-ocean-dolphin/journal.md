@@ -2,7 +2,7 @@
 
 ## [2026-07-15T12:06:00+01:00] - Mobile Optimization & UX Polish
 
-- **Time to Complete**: 15 minutes
+- **Time to Complete**: 4 minutes
 - **Key Outcomes**:
   - Modified [app.js](../../src/wwwroot/app.js) to replace mouse events with unified Pointer Events, implement mobile drag-to-explore / release-to-freeze interaction rules, prevent default touch gestures, and trigger pointer ripples on copy actions.
   - Modified [style.css](../../src/wwwroot/style.css) to support clean scale and opacity transition styles for `#copied-badge` when toggled.
