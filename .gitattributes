@@ -1,0 +1,19 @@
+# Normalise text files to LF in the repository and working tree.
+* text=auto eol=lf
+
+# Common binary formats must not be normalised as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.7z binary
+*.mp3 binary
+*.mp4 binary
+*.woff binary
+*.woff2 binary

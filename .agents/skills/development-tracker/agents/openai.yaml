@@ -1,0 +1,4 @@
+interface:
+  display_name: "Development Tracker"
+  short_description: "Record durable AI-agent work history"
+  default_prompt: "Use $development-tracker to record this completed task and its handoff details."

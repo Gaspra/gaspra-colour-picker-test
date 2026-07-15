@@ -1,0 +1,4 @@
+interface:
+  display_name: "Context Sorter"
+  short_description: "Copy and index reusable agent context"
+  default_prompt: "Use $context-sorter to add this material as reusable agent context."
