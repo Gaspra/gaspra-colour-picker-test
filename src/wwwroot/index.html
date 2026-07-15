@@ -2,12 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gaspra Colour Picker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaspra Colour Picker - Interactive Full-Viewport Color Palette</title>
+    <meta name="description" content="An interactive full-screen color palette and picker with a beautiful glassmorphic Heads-Up Display, instant click-to-copy, spacebar locking, and mobile support.">
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts: Outfit (headings/labels) and JetBrains Mono (monospaced readouts) -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app">
-        <h1>Gaspra Colour Picker Placeholder</h1>
-        <p>This is a temporary placeholder to verify static file serving.</p>
-    </div>
+    <!-- Viewport Container that captures pointer movement -->
+    <main id="viewport" touch-action="none">
+        <!-- Hidden header to satisfy SEO and accessibility outline requirements -->
+        <header class="sr-only">
+            <h1>Gaspra Colour Picker</h1>
+        </header>
+
+        <!-- Dynamic heads-up display card -->
+        <article id="hud" class="theme-dark" role="region" aria-label="Color values Heads-Up Display">
+            <!-- Center Color Preview Indicator -->
+            <div class="hud-header">
+                <div id="color-preview" aria-hidden="true"></div>
+                <div class="hud-status">
+                    <span id="lock-badge" class="badge hidden">LOCKED</span>
+                    <span id="copied-badge" class="badge hidden">COPIED!</span>
+                </div>
+            </div>
+
+            <!-- Value readouts -->
+            <section class="readouts">
+                <div class="readout-item" id="readout-hex-container">
+                    <span class="readout-label">HEX</span>
+                    <div class="readout-value-wrapper">
+                        <span id="hex-value" class="readout-value font-mono">#FFFFFF</span>
+                        <button id="copy-btn" class="copy-icon-btn" aria-label="Copy HEX value to clipboard" title="Copy HEX value">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="readout-item">
+                    <span class="readout-label">RGB</span>
+                    <span id="rgb-value" class="readout-value font-mono">rgb(255, 255, 255)</span>
+                </div>
+
+                <div class="readout-item">
+                    <span class="readout-label">HSL</span>
+                    <span id="hsl-value" class="readout-value font-mono">hsl(0, 0%, 100%)</span>
+                </div>
+            </section>
+
+            <!-- Keyboard & Interaction Instructions -->
+            <footer class="hud-footer">
+                <span id="instruction-text">Move mouse to pick • Click to copy • Space to lock</span>
+            </footer>
+        </article>
+
+        <!-- Custom Pointer Tracker representing the sampled location -->
+        <div id="pointer-tracker" class="theme-dark" aria-hidden="true"></div>
+    </main>
+
+    <script type="module" src="app.js"></script>
 </body>
 </html>

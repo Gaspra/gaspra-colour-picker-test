@@ -26,8 +26,8 @@ public class RoutingTests : IClassFixture<WebApplicationFactory<Program>>
         // Assert
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
-        Assert.Contains("<title>Gaspra Colour Picker</title>", content);
-        Assert.Contains("<h1>Gaspra Colour Picker Placeholder</h1>", content);
+        Assert.Contains("<title>Gaspra Colour Picker - Interactive Full-Viewport Color Palette</title>", content);
+        Assert.Contains("<h1>Gaspra Colour Picker</h1>", content);
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public class RoutingTests : IClassFixture<WebApplicationFactory<Program>>
         // Assert
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
-        Assert.Contains("<title>Gaspra Colour Picker</title>", content);
+        Assert.Contains("<title>Gaspra Colour Picker - Interactive Full-Viewport Color Palette</title>", content);
     }
 }
