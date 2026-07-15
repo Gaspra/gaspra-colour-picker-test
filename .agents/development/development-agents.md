@@ -10,4 +10,5 @@ Use this index to identify reusable agent codenames and locate the most relevant
 
 ## Recent completed work
 
+- **2026-07-15**: Added mobile and tablet pointer interaction requirements to the product scope. See [journal.md](ivory-glacier-falcon/journal.md) for details.
 - **2026-07-15**: Product Initialization and Scoping by `ivory-glacier-falcon` (Product Owner). Created [product-scope.md](../product/product-scope.md) and updated [README.md](../../README.md). See [journal.md](ivory-glacier-falcon/journal.md) for details.

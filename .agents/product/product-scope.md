@@ -32,12 +32,22 @@ Rather than rendering standard color picker inputs or small panels, the **entire
 
 ### C. Interactions & Micro-Animations
 - **Hover/Move**: Viewport color matches the coordinates. The HUD values and preview update dynamically at 60fps.
-- **Click**:
+- **Click / Tap**:
   - Copies the current HEX color code to the user's clipboard.
   - Shows a temporary "Copied!" notification on the HUD (with a scale/fade micro-animation).
   - Triggers a beautiful, expanding ripple effect at the click coordinate.
 - **Keyboard Shortcuts (Premium Touch)**:
   - Pressing `Spacebar` freezes/locks the current color selection, allowing the user to move their mouse to copy specific values from the HUD or adjust parameters without losing their place. Pressing `Spacebar` again unlocks it.
+
+### D. Mobile & Tablet Responsiveness
+- **Pointer Event Handling**: Use the unified Pointer Events API (`pointerdown`, `pointermove`, `pointerup`) instead of mouse-only events. This ensures touch drags work seamlessly on mobile and tablet devices.
+- **Scroll Prevention**: Apply CSS `touch-action: none` to the main viewport container and prevent default gestures on touchmove to avoid viewport scrolling or pull-to-refresh behavior while dragging.
+- **Responsive HUD Positioning**:
+  - On viewports wider than `768px` (desktop and large tablets), the HUD displays at the absolute center.
+  - On viewports `768px` or smaller (mobile and smaller tablets), dock the HUD at either the **top** or **bottom** of the viewport to keep the touch area clear and prevent the user's hand from obscuring the HUD readouts.
+- **Mobile Exploration & Copying**:
+  - **Drag to explore**: Dragging a finger across the viewport updates colors and HUD in real-time.
+  - **Release to freeze / Tap to copy**: On touchup (`pointerup`), the color selection freezes. A tap on the docked HUD copies the color to clipboard, preventing accidental copies during exploratory finger drags.
 
 ## 3. Visual Design System
 
@@ -67,4 +77,4 @@ The application must feel state-of-the-art and premium.
 4. **Copy-on-Click**: Clicking copies the color to the clipboard, validated by checking clipboard contents, and displays an animated "Copied!" transition.
 5. **No Placeholders**: Contains production-ready code with no mock values or unfinished elements.
 6. **Legible UI**: Text on the center HUD remains readable over white, black, or neon hover colors.
-7. **Responsive Design**: Works perfectly on varying monitor sizes and adapts its math to changing viewport widths/heights.
+7. **Responsive & Device-Optimized Design**: Works perfectly on varying monitor sizes and adapts its layout (centering vs. docking the HUD) and math to changing mobile, tablet, and desktop viewports. Prevents default scrolling gestures during touch dragging.
