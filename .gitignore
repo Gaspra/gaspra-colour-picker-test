@@ -27,3 +27,20 @@ Desktop.ini
 .agents/local/
 .claude/*.local.*
 .claude/local/
+
+# .NET / VS build artifacts
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Tt]est[Rr]esults/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+

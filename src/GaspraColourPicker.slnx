@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GaspraColourPicker.csproj" />
+  <Project Path="GaspraColourPicker.Tests/GaspraColourPicker.Tests.csproj" />
+</Solution>
