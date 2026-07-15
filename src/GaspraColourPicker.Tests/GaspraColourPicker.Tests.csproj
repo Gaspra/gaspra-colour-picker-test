@@ -25,6 +25,7 @@
 
   <Target Name="RunJsTests" AfterTargets="Test">
     <Exec Command="node ../wwwroot/color-math.test.mjs" />
+    <Exec Command="node ../wwwroot/app.test.mjs" />
   </Target>
 
 </Project>

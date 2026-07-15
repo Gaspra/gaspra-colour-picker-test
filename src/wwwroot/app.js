@@ -8,6 +8,13 @@ const state = {
   color: null
 };
 
+// Interaction Tracking State
+let isPointerDragging = false;
+let pointerDownX = 0;
+let pointerDownY = 0;
+let copiedTimeout = null;
+let copiedTransitionListener = null;
+
 // DOM Elements
 const viewport = document.getElementById('viewport');
 const hud = document.getElementById('hud');
@@ -65,15 +72,34 @@ function copyColorToClipboard() {
   if (!state.color) return;
 
   navigator.clipboard.writeText(state.color.hex).then(() => {
-    // Show temporary badge notification
-    copiedBadge.classList.remove('hidden');
-    
-    if (window.copiedTimeout) {
-      clearTimeout(window.copiedTimeout);
+    // Clear any pending timeout and transition listeners
+    if (copiedTimeout) {
+      clearTimeout(copiedTimeout);
+      copiedTimeout = null;
     }
+    if (copiedTransitionListener) {
+      copiedBadge.removeEventListener('transitionend', copiedTransitionListener);
+      copiedTransitionListener = null;
+    }
+
+    // Show temporary badge notification with transition
+    copiedBadge.classList.remove('hidden');
+    void copiedBadge.offsetWidth; // Force reflow
+    copiedBadge.classList.add('show');
     
-    window.copiedTimeout = setTimeout(() => {
-      copiedBadge.classList.add('hidden');
+    copiedTimeout = setTimeout(() => {
+      copiedBadge.classList.remove('show');
+      
+      copiedTransitionListener = (e) => {
+        if (e.propertyName === 'opacity') {
+          copiedBadge.classList.add('hidden');
+          if (copiedTransitionListener) {
+            copiedBadge.removeEventListener('transitionend', copiedTransitionListener);
+            copiedTransitionListener = null;
+          }
+        }
+      };
+      copiedBadge.addEventListener('transitionend', copiedTransitionListener);
     }, 1500);
   }).catch(err => {
     console.error('Failed to copy color to clipboard:', err);
@@ -132,9 +158,17 @@ function updateCoords(clientX, clientY) {
   updateUI(state.color);
 }
 
-// Pointer Event Handlers
+// Pointer Event Handlers for Viewport
 viewport.addEventListener('pointerdown', (e) => {
-  // Touch dragging behavior starts on pointer down
+  if (e.target.closest('#hud')) {
+    return;
+  }
+
+  isPointerDragging = false;
+  pointerDownX = e.clientX;
+  pointerDownY = e.clientY;
+
+  // Touch down unlocks and samples immediately
   if (e.pointerType === 'touch') {
     if (state.isLocked) {
       toggleLock(false);
@@ -144,39 +178,45 @@ viewport.addEventListener('pointerdown', (e) => {
 });
 
 viewport.addEventListener('pointermove', (e) => {
+  if (e.target.closest('#hud')) {
+    return;
+  }
+
+  // Check if pointer dragged significantly (threshold: 5px)
+  if (Math.abs(e.clientX - pointerDownX) > 5 || Math.abs(e.clientY - pointerDownY) > 5) {
+    isPointerDragging = true;
+  }
+
   if (!state.isLocked) {
     updateCoords(e.clientX, e.clientY);
   }
 });
 
 viewport.addEventListener('pointerup', (e) => {
-  // Touch releases automatically freeze the selection on mobile
-  if (e.pointerType === 'touch') {
-    if (!state.isLocked) {
-      toggleLock(true);
-    }
-  }
-});
-
-// Click viewport to copy
-viewport.addEventListener('click', (e) => {
-  // If clicked inside HUD card, let HUD handles actions
   if (e.target.closest('#hud')) {
     return;
   }
 
-  // Only trigger click-to-copy via mouse click on desktop
-  if (e.pointerType === 'mouse' || e.pointerType === '') {
-    createRipple(e.clientX, e.clientY);
-    copyColorToClipboard();
+  if (e.pointerType === 'touch') {
+    // Touch release freezes selection on mobile
+    if (!state.isLocked) {
+      toggleLock(true);
+    }
+  } else if (e.pointerType === 'mouse') {
+    // Mouse click-to-copy (only if they didn't drag)
+    if (!isPointerDragging) {
+      createRipple(e.clientX, e.clientY);
+      copyColorToClipboard();
+    }
   }
 });
 
-// HUD click behaviors
+// HUD click/tap behaviors
 hud.addEventListener('click', (e) => {
   // Copy button explicitly copies
   if (e.target.closest('#copy-btn')) {
     e.stopPropagation();
+    createRipple(e.clientX, e.clientY);
     copyColorToClipboard();
     return;
   }
@@ -184,6 +224,7 @@ hud.addEventListener('click', (e) => {
   // On mobile (docked HUD), tap anywhere on the HUD to copy the frozen selection
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   if (isMobile && state.isLocked) {
+    createRipple(e.clientX, e.clientY);
     copyColorToClipboard();
   }
 });
@@ -201,6 +242,13 @@ updateInstructionText();
 window.addEventListener('resize', () => {
   updateInstructionText();
 });
+
+// Prevent default touch scrolling and pull-to-refresh gestures on mobile
+window.addEventListener('touchmove', (e) => {
+  if (e.target.closest('#viewport')) {
+    e.preventDefault();
+  }
+}, { passive: false });
 
 // Set starting color at center of screen
 window.addEventListener('DOMContentLoaded', () => {
